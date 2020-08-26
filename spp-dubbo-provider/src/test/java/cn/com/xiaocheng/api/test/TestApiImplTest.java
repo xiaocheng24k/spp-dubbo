@@ -5,6 +5,8 @@ import cn.com.xiaocheng.SppApplicationTest;
 import cn.com.xiaocheng.api.TestApi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -13,12 +15,23 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest(classes = SppApplicationTest.class)
 public class TestApiImplTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(TestApiImplTest.class);
 
     @Autowired
     TestApi testApi;
 
     @Test
     public void testServiceTest(){
-        System.out.println(testApi.testservice());
+        logger.info(testApi.testservice());
+    }
+
+    @Test
+    public void redisGetTest(){
+        testApi.redisGetTest("users");
+    }
+
+    @Test
+    public void redisSetTest(){
+        testApi.redisSetTest("users");
     }
 }
