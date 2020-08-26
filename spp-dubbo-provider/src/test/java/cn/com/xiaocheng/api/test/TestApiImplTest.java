@@ -24,4 +24,14 @@ public class TestApiImplTest {
     public void testServiceTest(){
         logger.info(testApi.testservice());
     }
+
+    @Test
+    public void redisGetTest(){
+        testApi.redisGetTest("users");
+    }
+
+    @Test
+    public void redisSetTest(){
+        testApi.redisSetTest("users");
+    }
 }

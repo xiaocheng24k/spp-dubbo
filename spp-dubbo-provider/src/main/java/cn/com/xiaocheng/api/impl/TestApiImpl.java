@@ -31,4 +31,16 @@ public class TestApiImpl implements TestApi {
         logger.info("查询数据库为 : {}",JSON.toJSONString(users));
         return "hello";
     }
+
+    public void redisGetTest(String key) {
+        List<User> users = (List<User>)redisUtil.get(key);
+        logger.info(JSON.toJSONString(users));
+    }
+
+    public void redisSetTest(String key) {
+        List<User> users = testDao.selectUser();
+        logger.info("查询数据库为 : {}",JSON.toJSONString(users));
+        boolean set = redisUtil.set(key, users);
+        logger.info("存入结果为：{}",set);
+    }
 }
