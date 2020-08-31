@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,9 @@ public class TestApiImpl implements TestApi {
     RedisUtil redisUtil;
     @Autowired
     TestDao testDao;
+    @Autowired
+    RedisTemplate redisTemplate;
+
 
     public String testservice() {
         logger.info("改方法被调用");
@@ -40,7 +44,10 @@ public class TestApiImpl implements TestApi {
     public void redisSetTest(String key) {
         List<User> users = testDao.selectUser();
         logger.info("查询数据库为 : {}",JSON.toJSONString(users));
-        boolean set = redisUtil.set(key, users);
-        logger.info("存入结果为：{}",set);
+//        boolean set = redisUtil.lSet(key, users);
+        Long list = redisTemplate.opsForList().leftPushAll(key, users);
+        logger.info("存入结果为：{}",list);
+        List list1 = redisTemplate.opsForList().range(key, 0, -1);
+        logger.info("取出数据为： {}",JSON.toJSONString(list1));
     }
 }

@@ -11,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = SppApplicationTest.class)
 public class TestApiImplTest {
@@ -34,4 +39,14 @@ public class TestApiImplTest {
     public void redisSetTest(){
         testApi.redisSetTest("users");
     }
+
+
+//    @Test
+//    public void tetst() throws ParseException {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+////        String s = sdf.format(Date.parse("8/26/20 1:37:21 PM"));
+//        String s1 = sdf.format(sdf.parse("8/26/20 1:37:21 下午"));
+//        logger.info(s1);
+//
+//    }
 }
